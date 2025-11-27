@@ -1,0 +1,21 @@
+"tshark" -l -i "WLAN 3" -I -w d://cap.pcap | "tshark" -I -r d://cap.pcap -W "(wlan.fc.type_subtype == 0x0e) && frame.len > 1000"
+
+"tshark" -l -i "WLAN 3" -I -w d://liuliangcap.pcap -c 10
+
+"tshark" -l -i "WLAN 3" -I -Y "(wlan.fc.type_subtype == 0x0e) && frame.len > 1000" -w d://allcap.pcap -c 10
+
+WlanHelper.exe "WLAN 3" mode monitor
+WlanHelper.exe "WLAN 3" freq 5
+WlanHelper.exe "WLAN 3" channel 153
+
+WlanHelper.exe "WLAN 4" mode monitor
+WlanHelper.exe "WLAN 4" freq 5
+WlanHelper.exe "WLAN 4" channel 153
+
+wifi密码：lpntu3etfx
+
+"tshark" -l -i “WLAN 3” -I -Y "(wlan.fc.type_subtype == 0x0e) && frame.len > 1000" -T fields -e frame.time_relative -e wlan.sa -e wlan.da -e wlan.vht.compressed_beamforming_report | python E:\WIFITRA\BFM-tool-main\BFM-tool-main\BFM_capture.py
+
+wlan.addr == 28:34:FF:CA:D5:A9
+wlan.addr == 3c:a2:c3:c8:d9:c2
+wlan.addr == c4:41:1e:cd:28:45
